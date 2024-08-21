@@ -4,7 +4,7 @@ import geopandas as gpd
 # Params of connection
 connection_params = {
     'ip_host': 'localhost',
-    'db_name': 'mba_geo',
+    'db_name': 'db_geo',
     'db_port': '5432',
     'user': 'postgres',
     'password': '123456'
@@ -60,7 +60,10 @@ def post_shp_to_postgis(file_path: str, table_name: str, crs_epsg: int, db_conne
         gdf = gpd.read_file(file_path)
 
         # Filter for rows where 'municipio' is 'Itacaré'
-        # gdf = gdf[gdf['municipio'] == 'Itacare']
+        # gdf = gdf[gdf['municipio'] == 'Icatare']
+
+        # Select the first 100 records
+        # gdf = gdf.head(100)
 
         gdf.columns = gdf.columns.str.lower()
 
@@ -112,7 +115,7 @@ if db_connection:
     # try:
     #     print(read_geodataframe_to_postgis(
     #         'BA-2914901-C70164ED10D548B3B38B8F743253FC11', 'area_imovel', db_connection))
-        
+
     #     print('GDF reading done!')
     # except Exception as err:
     #     print(err)
